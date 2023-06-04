@@ -14,7 +14,7 @@ app.use(routers) // habilitando as rotas
 // inicializando o banco de dados
 AppDataSource.initialize().then(() => {
     // inicializando o servidor
-    app.listen(3333, () => {
+    app.listen(3000, () => {
         console.log('Server is running on port 3333')
     })
 }).catch((error) => {
