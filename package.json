@@ -26,7 +26,7 @@
    },
    "scripts": {
       "build": "rm -rf ./dist && tsc",
-      "start": "node ./dist/index.js",
+      "start": "node ./build/src/server.js",
       "dev": "nodemon src/server.ts",
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    }
