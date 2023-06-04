@@ -25,8 +25,8 @@
       "typeorm": "^0.3.16"
    },
    "scripts": {
-      "build": "tsc",
-      "start": "node src/server.ts",
+      "build": "rm -rf ./dist && tsc",
+      "start": "node ./dist/index.js",
       "dev": "nodemon src/server.ts",
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    }
