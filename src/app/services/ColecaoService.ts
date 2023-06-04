@@ -3,12 +3,13 @@ import ColecaoEntity from '../entities/ColecaoEntity';
 import ColecaoInterface from '../interfaces/entities/ColecaoInterface';
 import { ColecaoRepositoryInterface } from '../interfaces/repositories/ColecaoRepositoryInterface';
 import ColecaoServiceInterface from '../interfaces/services/ColecaoServiceInterface';
+import ColecaoRepository from '../repositories/ColecaoRepository';
 
 class ColecaoService implements ColecaoServiceInterface {
   private readonly colecaoRepository: ColecaoRepositoryInterface;
 
-  constructor(colecaoRepository: ColecaoRepositoryInterface) {
-    this.colecaoRepository = colecaoRepository;
+  constructor(colecaoRepository?: ColecaoRepositoryInterface) {
+    this.colecaoRepository = colecaoRepository ?? ColecaoRepository;
   }
 
   async findAll(): Promise<ColecaoEntity[]> {

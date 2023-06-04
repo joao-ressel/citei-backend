@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import 'reflect-metadata'
 import express from 'express'
 import cors from 'cors'
@@ -8,8 +9,7 @@ import errorHandler from './app/Errors/ErrorHandle'
 const app = express() // iniciliazando o express
 app.use(cors()) // habilitando o cors
 app.use(express.json()) // habilitando o express para receber json
-app.use(routers) // habilitando as rotas\
-app.use(errorHandler) // habilitando o tratamento de erros
+app.use(routers) // habilitando as rotas
 
 // inicializando o banco de dados
 AppDataSource.initialize().then(() => {
