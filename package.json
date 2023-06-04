@@ -26,7 +26,8 @@
    },
    "scripts": {
       "build": "tsc",
-      "start": " nodemon src/server.ts",
+      "start": "node src/server.ts",
+      "dev": "nodemon src/server.ts",
       "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    }
 }
