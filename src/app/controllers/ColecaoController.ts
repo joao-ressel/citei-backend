@@ -9,6 +9,7 @@ import {
 import errorHandler from '../Errors/ErrorHandle';
 import ColecaoServiceInterface from '../interfaces/services/ColecaoServiceInterface';
 import ColecaoRepository from '../repositories/ColecaoRepository';
+import { validationResult } from 'express-validator';
 
 class ColecaoController {
   public routes = Router();
@@ -16,6 +17,7 @@ class ColecaoController {
 
   constructor() {
     this.colecaoService = new ColecaoService(ColecaoRepository);
+
     this.routes.get('/colecao', GetColecaoValidator, this.findAll.bind(this));
     this.routes.get('/colecao/:id', this.findById.bind(this));
     this.routes.post(
@@ -33,6 +35,10 @@ class ColecaoController {
 
   async findAll(request: Request, response: Response): Promise<Response> {
     try {
+      const result = validationResult(request);
+      if (!result.isEmpty()) {
+        return response.status(422).json({ errors: result.array() });
+      }
       const colecoes = await this.colecaoService.findAll(request.query.titulo as string);
       return response.json(colecoes);
     } catch (error) {
@@ -52,6 +58,10 @@ class ColecaoController {
 
   async create(request: Request, response: Response): Promise<Response> {
     try {
+      const result = validationResult(request);
+      if (!result.isEmpty()) {
+        return response.status(422).json({ errors: result.array() });
+      }
       const colecao = request.body as ColecaoInterface;
       const newColecao = await this.colecaoService.create(colecao);
       return response.json(newColecao);
@@ -62,6 +72,10 @@ class ColecaoController {
 
   async update(request: Request, response: Response): Promise<Response> {
     try {
+      const result = validationResult(request);
+      if (!result.isEmpty()) {
+        return response.status(422).json({ errors: result.array() });
+      }
       const { id } = request.params;
       const colecao = request.body as ColecaoInterface;
       const updatedColecao = await this.colecaoService.update(

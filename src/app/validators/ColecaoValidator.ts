@@ -1,20 +1,20 @@
-import { body } from 'express-validator';
+import { body, query } from 'express-validator';
 
 export const CreateColecaoValidator = [
-  body('titulo').notEmpty().isString(),
-  body('imagem').notEmpty().isString(),
-  body('autor').notEmpty().isString(),
-  body('subtitulo').optional().isString(),
+  body('titulo').notEmpty().isString().isLength({ max: 255 }),
+  body('imagem').notEmpty().isString().isLength({ max: 255 }),
+  body('autor').notEmpty().isString().isLength({ max: 255 }),
+  body('subtitulo').optional().isString().isLength({ max: 255 }),
 ];
 
 export const UpdateColecaoValidator = [
-  body('titulo').optional().isString(),
-  body('imagem').optional().isString(),
-  body('autor').optional().isString(),
-  body('subtitulo').optional().isString(),
+  body('titulo').optional().isString().isLength({ max: 255 }),
+  body('imagem').optional().isString().isLength({ max: 255 }),
+  body('autor').optional().isString().isLength({ max: 255 }),
+  body('subtitulo').optional().isString().isLength({ max: 255 }),
 ];
 
 
 export const GetColecaoValidator = [
-  body('titulo').optional().isString().isLength({ max: 255 }),
+  query('titulo').optional().isString().isLength({ max: 255 }),
 ]
