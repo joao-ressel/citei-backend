@@ -1,5 +1,4 @@
 import ColecaoEntity from "../../../app/entities/ColecaoEntity";
-import CitacaoInterface from "../../../app/interfaces/entities/CitacaoInterface";
 import ColecaoInterface from "../../../app/interfaces/entities/ColecaoInterface";
 
 export const OneColecaoFixture: ColecaoEntity = {
