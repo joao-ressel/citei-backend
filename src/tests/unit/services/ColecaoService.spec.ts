@@ -20,9 +20,13 @@ describe('ColecaoService', () => {
   describe('findAll', () => {
     it('should return all ColecaoEntity objects', async () => {
       const result = await colecaoService.findAll();
-
       expect(result).toEqual(ManyColecaoFixture);
       expect(colecaoRepositoryMock.findAll).toHaveBeenCalled();
+    });
+
+    it('should call the repository with the specified title', async () => {
+      await colecaoService.findAll('titulo');
+      expect(colecaoRepositoryMock.findAll).toHaveBeenCalledWith('titulo');
     });
   });
 

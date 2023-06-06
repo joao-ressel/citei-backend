@@ -4,6 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import { AppDataSource } from './database/data-source'
 import routers from './app/routes/routes'
+
 const port = process.env.PORT || 3000
 
 const app = express() // iniciliazando o express

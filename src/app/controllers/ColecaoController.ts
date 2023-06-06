@@ -3,17 +3,20 @@ import ColecaoService from '../services/ColecaoService';
 import ColecaoInterface from '../interfaces/entities/ColecaoInterface';
 import {
   CreateColecaoValidator,
+  GetColecaoValidator,
   UpdateColecaoValidator,
 } from '../validators/ColecaoValidator';
 import errorHandler from '../Errors/ErrorHandle';
+import ColecaoServiceInterface from '../interfaces/services/ColecaoServiceInterface';
+import ColecaoRepository from '../repositories/ColecaoRepository';
 
 class ColecaoController {
   public routes = Router();
-  private colecaoService = new ColecaoService();
+  private colecaoService: ColecaoServiceInterface;
 
   constructor() {
-    this.colecaoService = new ColecaoService();
-    this.routes.get('/colecao', this.findAll.bind(this));
+    this.colecaoService = new ColecaoService(ColecaoRepository);
+    this.routes.get('/colecao', GetColecaoValidator, this.findAll.bind(this));
     this.routes.get('/colecao/:id', this.findById.bind(this));
     this.routes.post(
       '/colecao',
@@ -28,12 +31,12 @@ class ColecaoController {
     this.routes.delete('/colecao/:id', this.delete.bind(this));
   }
 
-  async findAll(_request: Request, response: Response): Promise<Response> {
+  async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const colecoes = await this.colecaoService.findAll();
+      const colecoes = await this.colecaoService.findAll(request.query.titulo as string);
       return response.json(colecoes);
     } catch (error) {
-      errorHandler(error, _request, response, null);
+      errorHandler(error, request, response, null);
     }
   }
 

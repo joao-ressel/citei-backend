@@ -9,8 +9,8 @@ class ColecaoRepository implements ColecaoRepositoryInterface {
     this.colecaoRepository = AppDataSource.getRepository(ColecaoEntity)
   }
 
-  async findAll(): Promise<ColecaoEntity[]> {
-    const query = `
+  async findAll(titulo?: string): Promise<ColecaoEntity[]> {
+    let query = `
     SELECT
       colecao.id as colecao_id,
       colecao.titulo as colecao_titulo,
@@ -21,6 +21,10 @@ class ColecaoRepository implements ColecaoRepositoryInterface {
     FROM
       colecao
   `;
+
+    if(titulo) {
+      query += `WHERE colecao.titulo LIKE '%${titulo}%'`
+    }
   
     return this.colecaoRepository.query(query)
   }
@@ -62,4 +66,4 @@ class ColecaoRepository implements ColecaoRepositoryInterface {
   }
 }
 
-export default new ColecaoRepository()
+export default new ColecaoRepository();

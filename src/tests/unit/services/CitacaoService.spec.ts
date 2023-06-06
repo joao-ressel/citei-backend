@@ -29,6 +29,12 @@ describe('CitacaoService', () => {
       expect(result).toEqual(manyCitacoesFixture);
       expect(citacaoRepositoryMock.findAll).toHaveBeenCalled();
     });
+
+    it('should send params to CitacaoRepository', async () => {
+      const titulo = 'Citacao';
+      const result = await citacaoService.findAll(titulo);
+      expect(citacaoRepositoryMock.findAll).toHaveBeenCalledWith(titulo);
+    })
   });
 
   describe('findById', () => {

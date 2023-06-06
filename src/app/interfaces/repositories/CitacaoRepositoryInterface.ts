@@ -2,7 +2,7 @@ import CitacaoEntity from "../../entities/CitacaoEntity";
 import CitacaoInterface from "../entities/CitacaoInterface";
 
 export interface CitacaoRepositoryInterface {
-  findAll(): Promise<CitacaoEntity[]>;
+  findAll(titulo: string): Promise<CitacaoEntity[]>;
   findById(id: number): Promise<CitacaoEntity>;
   create(citacao: CitacaoInterface): Promise<CitacaoEntity>;
   update(id: number, citacao: CitacaoInterface): Promise<CitacaoEntity>;

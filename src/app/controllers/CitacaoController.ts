@@ -4,21 +4,25 @@ import CitacaoInterface from '../interfaces/entities/CitacaoInterface';
 import { validationResult } from 'express-validator';
 import {
   CreateCitacaoValidator,
+  GetCitacaoValidator,
   UpdateCitacaoValidator,
 } from '../validators/CitacaoValidator';
 import CitacaoRepository from '../repositories/CitacaoRepository';
 import ColecaoRepository from '../repositories/ColecaoRepository';
 import errorHandler from '../Errors/ErrorHandle';
+import CitacaoServiceInterface from '../interfaces/services/CitacaoServiceInterface';
 
 class CitacaoController {
   public routes = Router();
-  private citacaoService;
+  private citacaoService: CitacaoServiceInterface;
+
   constructor() {
     this.citacaoService = new CitacaoService(
       CitacaoRepository,
       ColecaoRepository
     );
-    this.routes.get('/citacao', this.findAll.bind(this));
+  
+    this.routes.get('/citacao', GetCitacaoValidator, this.findAll.bind(this));
     this.routes.get('/citacao/:id', this.findById.bind(this));
     this.routes.post(
       '/citacao',
@@ -33,12 +37,12 @@ class CitacaoController {
     this.routes.delete('/citacao/:id', this.delete.bind(this));
   }
 
-  async findAll(_request: Request, response: Response): Promise<Response> {
+  async findAll(request: Request, response: Response): Promise<Response> {
     try {
-      const citacoes = await this.citacaoService.findAll();
+      const citacoes = await this.citacaoService.findAll(request.query.titulo as string);
       return response.json(citacoes);
     } catch (error) {
-      errorHandler(error, _request, response, null);
+      errorHandler(error, request, response, null);
     }
   }
 

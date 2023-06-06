@@ -11,8 +11,8 @@ class CitacaoRepository implements CitacaoRepositoryInterface {
     this.citacaoRepository = AppDataSource.getRepository(CitacaoEntity)
   }
 
-  async findAll(): Promise<CitacaoEntity[]> {
-    const query = `
+  async findAll(titulo: string): Promise<CitacaoEntity[]> {
+    let query = `
     SELECT
       citacao.id,
       citacao.titulo as citacao_titulo,
@@ -27,7 +27,11 @@ class CitacaoRepository implements CitacaoRepositoryInterface {
     LEFT JOIN
       colecao ON citacao.id_colecao = colecao.id
   `;
-  
+    
+    if (titulo) {
+      query += `WHERE citacao.titulo LIKE '%${titulo}%'`
+    }
+
     return this.citacaoRepository.query(query)
   }
 

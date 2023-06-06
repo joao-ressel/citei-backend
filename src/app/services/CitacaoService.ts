@@ -18,8 +18,8 @@ class CitacaoService implements CitacaoServiceInterface {
     this.colecaoRepository = colecaoRepository;
   }
 
-  async findAll(): Promise<CitacaoEntity[]> {
-    return await this.citacaoRepository.findAll();
+  async findAll(titulo?: string): Promise<CitacaoEntity[]> {
+    return await this.citacaoRepository.findAll(titulo);
   }
 
   async findById(id: number): Promise<CitacaoEntity> {

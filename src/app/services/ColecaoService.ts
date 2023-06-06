@@ -8,12 +8,12 @@ import ColecaoRepository from '../repositories/ColecaoRepository';
 class ColecaoService implements ColecaoServiceInterface {
   private readonly colecaoRepository: ColecaoRepositoryInterface;
 
-  constructor(colecaoRepository?: ColecaoRepositoryInterface) {
-    this.colecaoRepository = colecaoRepository ?? ColecaoRepository;
+  constructor(colecaoRepository: ColecaoRepositoryInterface) {
+    this.colecaoRepository = colecaoRepository;
   }
 
-  async findAll(): Promise<ColecaoEntity[]> {
-    return await this.colecaoRepository.findAll();
+  async findAll(titulo?: string): Promise<ColecaoEntity[]> {
+    return await this.colecaoRepository.findAll(titulo);
   }
 
   async findById(id: number): Promise<ColecaoEntity> {

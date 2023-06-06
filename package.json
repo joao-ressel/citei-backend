@@ -28,6 +28,7 @@
       "build": "rm -rf ./build && tsc",
       "start": "node ./build/src/server.js",
       "dev": "nodemon src/server.ts",
-      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+      "test": "jest  --verbose"
    }
 }

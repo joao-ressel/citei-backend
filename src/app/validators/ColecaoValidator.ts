@@ -13,3 +13,8 @@ export const UpdateColecaoValidator = [
   body('autor').optional().isString(),
   body('subtitulo').optional().isString(),
 ];
+
+
+export const GetColecaoValidator = [
+  body('titulo').optional().isString().isLength({ max: 255 }),
+]
