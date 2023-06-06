@@ -9,7 +9,6 @@ jest.mock('../../app/repositories/ColecaoRepository', () => {
   const colecao = {
     id: 1,
     titulo: 'titulo',
-    subtitulo: 'subtitulo',
     autor: 'autor',
     imagem: 'imagem',
   };
@@ -49,7 +48,6 @@ describe('ColecaoController', () => {
   const colecao = {
     id: 1,
     titulo: 'titulo',
-    subtitulo: 'subtitulo',
     autor: 'autor',
     imagem: 'imagem',
   };
