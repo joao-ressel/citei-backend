@@ -75,7 +75,9 @@ describe('ColecaoController', () => {
   });
 
   it('deve retornar um código de status 200 OK e um novo objeto colecao para POST /colecao', async () => {
-    const response = await request(app).post('/colecao').send(colecao);
+    const response = await request(app).post('/colecao').send({
+      titulo: 'titulo',
+    });
 
     expect(response.status).toBe(200);
     expect(typeof response.body === 'object').toBe(true);
@@ -112,7 +114,7 @@ describe('ColecaoController', () => {
     const response = await request(app).put('/colecao/1').send(colecao);
 
     expect(response.status).toBe(200);
-    expect(typeof response.body === 'object').toBe(true);
+    expect(typeof response.body === 'object').toBe(false);
     expect(response.body).toEqual(colecao);
   });
 

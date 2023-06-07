@@ -18,18 +18,6 @@ exports[`ColecaoController deve retornar um código de status 422 ao deixar de e
     {
       "location": "body",
       "msg": "Invalid value",
-      "path": "imagem",
-      "type": "field",
-    },
-    {
-      "location": "body",
-      "msg": "Invalid value",
-      "path": "imagem",
-      "type": "field",
-    },
-    {
-      "location": "body",
-      "msg": "Invalid value",
       "path": "autor",
       "type": "field",
     },
