@@ -8,6 +8,7 @@ class CitacaoRepository implements CitacaoRepositoryInterface {
   private readonly citacaoRepository: Repository<CitacaoEntity>;
 
   constructor() {
+    // Obtém o repositório da entidade CitacaoEntity a partir da instância do AppDataSource
     this.citacaoRepository = AppDataSource.getRepository(CitacaoEntity)
   }
 
@@ -32,6 +33,7 @@ class CitacaoRepository implements CitacaoRepositoryInterface {
       query += `WHERE citacao.titulo LIKE '%${titulo}%'`
     }
 
+    // Executa a consulta SQL usando o método query do repositório
     return this.citacaoRepository.query(query)
   }
 
@@ -53,25 +55,33 @@ class CitacaoRepository implements CitacaoRepositoryInterface {
     WHERE
       citacao.id = ${id}`;
   
+    // Executa a consulta SQL usando o método query do repositório
     const citacao = await this.citacaoRepository.query(query)
 
+    // Retorna a primeira entidade encontrada ou null se nenhuma entidade foi encontrada
     return citacao.length ? citacao[0] : null
   }
 
   async getCitacaoOnly(id: number): Promise<CitacaoEntity> {
+    // Obtém uma única entidade CitacaoEntity com base no ID usando o método findOne do repositório
     return this.citacaoRepository.findOne({ where: { id } })
   }
 
   async create(colecao: CitacaoInterface): Promise<CitacaoEntity> {
+    // Cria uma nova entidade CitacaoEntity no banco de dados usando o método save do repositório
     return this.citacaoRepository.save(colecao)
   }
 
   async update(id: number, colecao: CitacaoInterface): Promise<CitacaoEntity> {
+    // Atualiza uma entidade CitacaoEntity existente no banco de dados usando o método update do repositório
     await this.citacaoRepository.update(id, colecao)
+
+    // Obtém a entidade atualizada usando o método findOne do repositório
     return this.citacaoRepository.findOne({ where: { id } })
   }
 
   async delete(id: number): Promise<void> {
+    // Exclui uma entidade CitacaoEntity do banco de dados usando o método delete do repositório
     await this.citacaoRepository.delete(id)
   }
 }
