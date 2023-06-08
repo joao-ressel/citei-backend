@@ -8,7 +8,7 @@ import routers from './app/routes/routes'
 const port = process.env.PORT || 3000
 
 const app = express() // iniciliazando o express
-// app.use(cors()) // habilitando o cors
+app.use(cors()) // habilitando o cors
 app.use(express.json()) // habilitando o express para receber json
 app.use(routers) // habilitando as rotas
 
