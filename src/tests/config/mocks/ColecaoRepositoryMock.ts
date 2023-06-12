@@ -1,6 +1,7 @@
 import { ColecaoRepositoryInterface } from "../../../app/interfaces/repositories/ColecaoRepositoryInterface";
 import { CreatedColecaoFixture, ManyColecaoFixture, OneColecaoFixture } from "../fixtures/ColecaoFixture";
 
+//utiliza biblioteca jest que permite substituir o comportamento real do repositório por um comportamento simulado
 export const ColecaoRepositoryMock = (): jest.Mocked<ColecaoRepositoryInterface> => {
   return {
     findAll: jest.fn().mockResolvedValue(ManyColecaoFixture),
